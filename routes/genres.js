@@ -3,29 +3,7 @@
 const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
-const Validation = require("./validation");
-
-const Genre = mongoose.model("Genre",  new mongoose.Schema
-(
-    {
-        type:
-        {
-            type:String,
-            required: true,
-            minlength:5,
-            maxlength:30
-        }
-    }
-));
-
-
-// const genres = [{id: 1, type: "horror"},
-//                 {id: 2, type: "thriller"},
-//                 {id: 3, type: "comedy"},
-//                 {id: 4, type: "romance"},
-//                 {id: 5, type: "animation",}];
-
-
+const {Genre,validate} = require("../models/genre");
 
 router.get(
     "/",
@@ -53,7 +31,7 @@ router.post(
     "/",
     async (req, res) => {
 
-        if (Validation.validateGenre(req, res)) {
+        if (validate(req, res)) {
             let genre = new Genre
             (
                 {
@@ -71,7 +49,7 @@ router.put(
     "/:id",
     async (req, res) => {
 
-        if (!Validation.validateGenre(req, res)) {
+        if (!validate(req, res)) {
           return res;
         }
 

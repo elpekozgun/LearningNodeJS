@@ -1,41 +1,8 @@
-/*
-id
-isGold: bool
-name: String
-phone: "number"
-*/
-
-/*jshint esversion: 6 */
 
 const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
-const Validation = require("./validation");
-
-const Customer = mongoose.model("Customer",  new mongoose.Schema
-(
-    {
-        isGold:
-        {
-            type:Boolean,
-            required: true,
-            default:false
-        },
-        name:
-        {
-            type:String,
-            required:true,
-            minlength: 5,
-            maxlength: 100
-        },
-        phone:
-        {
-            type:Number,
-            required:true,
-        }
-    }
-));
-
+const {Customer, validate} = require("../models/customer");
 
 router.get(
     "/",
@@ -63,7 +30,7 @@ router.post(
     "/",
     async (req, res) => {
 
-        if (Validation.validateCustomer(req, res)) {
+        if (validate(req, res)) {
             let customer = new Customer
             (
                 {
@@ -83,7 +50,7 @@ router.put(
     "/:id",
     async (req, res) => {
 
-        if (!Validation.validateCustomer(req, res)) {
+        if (!validate(req, res)) {
           return res;
         }
 
