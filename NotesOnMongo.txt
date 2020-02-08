@@ -1,0 +1,8 @@
+When you install mongodb, the thing that does the job is mongod.exe (daemon)
+
+Add environmentvariables->path, the bin folder in C:\Program Files\MongoDB\Server\4.2\bin
+after that run cmd, and run -> mongod.
+you should see an exception telling that c:\data\db is not existent, which is the default folder mongodb stores the databases.
+
+
+
