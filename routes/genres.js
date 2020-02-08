@@ -53,7 +53,7 @@ router.post(
     "/",
     async (req, res) => {
 
-        if (Validation.validate(req, res)) {
+        if (Validation.validateGenre(req, res)) {
             let genre = new Genre
             (
                 {
@@ -71,9 +71,8 @@ router.put(
     "/:id",
     async (req, res) => {
 
-        if (!Validation.validate(req, res)) 
-        {
-            return res;
+        if (!Validation.validateGenre(req, res)) {
+          return res;
         }
 
         const genre = await Genre.findByIdAndUpdate(
