@@ -1,6 +1,13 @@
 /*jshint esversion: 6 */
 
 const mongoose = require("mongoose");
+const express = require("express");
+const genres = require("./routes/genres");
+const customers = require("./routes/customers");
+const movies = require("./routes/movies");
+const home = require("./routes/home");
+const app = express();
+
 
 mongoose.connect("mongodb://localhost/vidlyApp",
     { useNewUrlParser: true, useUnifiedTopology: true })
@@ -16,16 +23,12 @@ mongoose.connect("mongodb://localhost/vidlyApp",
 
 const url = "http://vidly.com";
 
-const express = require("express");
-const genres = require("./routes/genres");
-const customers = require("./routes/customers");
-const home = require("./routes/home");
 
-const app = express();
 app.use(express.json());
 
 app.use("/api/genres",genres);
 app.use("/api/customers", customers);
+app.use("/api/movies",movies);
 app.use("/", home);
 
 //PORT
