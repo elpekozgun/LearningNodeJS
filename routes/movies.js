@@ -41,7 +41,7 @@ router.post(
                 return res.status(400).send("invalid genre");
             }
 
-            let movie = new Movie
+            const movie = new Movie
             (
                 {
                     title: req.body.title,
